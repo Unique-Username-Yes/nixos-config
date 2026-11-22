@@ -2,9 +2,11 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
     ];
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "nvidia-x11"
@@ -15,16 +17,15 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nix-machine";
+  networking.hostName = "nixos-Desktop";
 
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/London";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mero = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" ];
     packages = with pkgs; [
       tree
     ];
@@ -52,6 +53,7 @@
     waybar
     vim
     git
+    bat
   ];
 
   # Q: Do I need this?
