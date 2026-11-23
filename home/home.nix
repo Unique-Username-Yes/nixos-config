@@ -1,9 +1,16 @@
 { config, pkgs, ... }:
 {
+  imports = [
+    ./programs/hyprland
+    ./programs/wofi
+    ./programs/waybar
+  ];
+
   home.username = "mero";
   home.homeDirectory = "/home/mero";
   home.packages = with pkgs; [
     firefox
+    tree
   ];
 
   programs.bash = {

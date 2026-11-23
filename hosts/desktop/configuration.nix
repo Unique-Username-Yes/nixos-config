@@ -26,9 +26,6 @@
   users.users.mero = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      tree
-    ];
   };
 
   programs.hyprland = {
@@ -47,19 +44,32 @@
 
   environment.systemPackages = with pkgs; [
     kitty
-    wofi
     mako
     hyprpolkitagent
     waybar
     vim
     git
     bat
+    pavucontrol 
+    pwvucontrol
   ];
 
   # Q: Do I need this?
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;   # PulseAudio compatibility, which Waybar's module needs
+    # jack.enable = true;
+  };
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+  ];
 
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
