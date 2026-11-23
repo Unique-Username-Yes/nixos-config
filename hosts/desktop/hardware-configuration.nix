@@ -8,23 +8,31 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/4a6ca51b-e9af-4ca2-b9a8-b2cd05e61e0c";
+    { device = "/dev/disk/by-uuid/a4004fa6-d32c-4a27-8e98-5bf34ab04109";
       fsType = "ext4";
     };
+  
+  fileSystems."/home/mero/fastdata" = {
+    device = "/dev/disk/by-uuid/77b33b69-99f2-44a6-8d52-390f9f7cf280";
+    fsType = "ext4";
+    options = [ "nofail" ];
+  };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/D525-8ED8";
+    { device = "/dev/disk/by-uuid/11E6-5A4C";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  swapDevices = [ ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/1561fae8-9570-4b24-ab3a-db4a2f98f2dd"; }
+    ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

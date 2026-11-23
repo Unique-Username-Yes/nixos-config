@@ -54,7 +54,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    kitty
     mako
     hyprpolkitagent
     waybar
@@ -63,6 +62,7 @@
     bat
     pavucontrol 
     pwvucontrol
+    btrfs-progs
   ];
 
   # Q: Do I need this?

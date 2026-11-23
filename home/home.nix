@@ -4,6 +4,8 @@
     ./programs/hyprland
     ./programs/wofi
     ./programs/waybar
+    ./programs/alacritty
+    ./programs/fastfetch
   ];
 
   home.username = "mero";
