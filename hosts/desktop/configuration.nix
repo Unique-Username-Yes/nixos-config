@@ -11,6 +11,8 @@
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "nvidia-x11"
     "nvidia-settings"
+    "steam"
+    "steam-unwrapped"
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -28,13 +30,22 @@
     extraGroups = [ "wheel" ];
   };
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-    xwayland.enable = true;
+  programs = {
+    hyprland = {
+      enable = true;
+      withUWSM = true;
+      xwayland.enable = true;
+    };
+    steam = {
+      enable = true;
+    };
+    gamemode = {
+      enable = true;
+    };
+    firefox = {
+      enable = true;
+    };
   };
-
-  programs.firefox.enable = true;
 
   services.greetd = {
     enable = true;
