@@ -6,6 +6,8 @@
     ./programs/waybar
     ./programs/alacritty
     ./programs/fastfetch
+    ./programs/nvim
+    ./programs/direnv
   ];
 
   home.username = "mero";

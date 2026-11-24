@@ -9,22 +9,32 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
-    nixosConfigurations = {
-      nixos-Desktop = nixpkgs.lib.nixosSystem {
-        modules = [ 
-          ./hosts/desktop/configuration.nix 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.mero = import ./home/home.nix;
-              backupFileExtension = "backup";
-            };
-          }
+  outputs = { self, nixpkgs, home-manager, ... }:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      devShells.${system}.default = pkgs.mkShell {
+        packages = with pkgs; [
+          nixd
+          nixfmt
         ];
       };
+      nixosConfigurations = {
+        nixos-Desktop = nixpkgs.lib.nixosSystem {
+          modules = [ 
+            ./hosts/desktop/configuration.nix 
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.mero = import ./home/home.nix;
+                backupFileExtension = "backup";
+              };
+            }
+          ];
+        };
+      };
     };
-  };
 }     

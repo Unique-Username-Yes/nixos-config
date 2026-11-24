@@ -1,0 +1,16 @@
+{
+  "nixpkgs": {
+    "expr": "import (builtins.getFlake \"/home/mero/nixos-config\").inputs.nixpkgs { }"
+  },
+  "formatting": {
+    "command": ["nixfmt"]
+  },
+  "options": {
+    "nixos": {
+      "expr": "(builtins.getFlake \"/home/mero/nixos-config\").nixosConfigurations.nixos-Desktop.options"
+    },
+    "home_manager": {
+      "expr": "(builtins.getFlake \"/home/mero/nixos-config\").nixosConfigurations.nixos-Desktop.options.home-manager.users.type.getSubOptions []"
+    }
+  }
+}
