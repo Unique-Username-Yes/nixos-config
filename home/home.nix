@@ -16,6 +16,7 @@
     firefox
     tree
     mullvad
+    vesktop
   ];
 
   programs.bash = {

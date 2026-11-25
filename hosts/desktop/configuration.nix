@@ -38,6 +38,7 @@
     };
     steam = {
       enable = true;
+      gamescopeSession.enable = true;
     };
     gamemode = {
       enable = true;
@@ -63,6 +64,7 @@
     pavucontrol 
     pwvucontrol
     btrfs-progs
+    mangohud
   ];
 
   # Q: Do I need this?
