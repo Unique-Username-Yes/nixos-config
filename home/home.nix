@@ -15,6 +15,7 @@
   home.packages = with pkgs; [
     firefox
     tree
+    mullvad
   ];
 
   programs.bash = {
